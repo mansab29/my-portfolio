@@ -340,7 +340,7 @@
         </div>
     </section>
 
-    <!-- About Section (z-10) WITH PHOTO (Now in Color) -->
+    <!-- About Section (z-10) WITH PHOTO -->
     <section id="about" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="space-y-4 mb-16 reveal">
             <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
@@ -383,10 +383,10 @@
                 </div>
             </div>
 
-            <!-- Right Side: Profile Photo in Liquid Glass Frame (COLOR) -->
+            <!-- Right Side: Profile Photo in Liquid Glass Frame -->
             <div class="lg:col-span-5 reveal delay-200 flex justify-center">
                 <div class="glass-panel p-3 rounded-3xl relative group w-64 h-64 sm:w-80 sm:h-80 overflow-hidden">
-                    <!-- Grayscale removed here -->
+                    <!-- Photo -->
                     <img src="profile.jpg" alt="Mansab Mohammed" 
                          class="w-full h-full object-cover rounded-2xl transition-all duration-700 relative z-10" 
                          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'; this.classList.add('p-8');">
@@ -524,7 +524,7 @@
         </div>
     </section>
 
-    <!-- Education Section (z-10) -->
+    <!-- Education Section (z-10) - REPLACED WITH ACTUAL LOGO IMAGE -->
     <section id="education" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="space-y-4 mb-16 reveal">
             <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
@@ -537,15 +537,12 @@
         <div class="max-w-3xl mx-auto glass-panel card-lift p-8 sm:p-10 rounded-2xl relative overflow-hidden reveal">
             
             <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6 pb-6 border-b border-white/10 relative z-10">
-                <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-[0_0_15px_rgba(94,39,80,0.5)] group-hover:scale-105 transition-transform duration-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full">
-                        <rect width="200" height="200" fill="#5b2652"/>
-                        <path d="M 25 85 Q 60 50 95 70 T 175 65 Q 130 95 90 85 T 25 85 Z" fill="#ffffff"/>
-                        <path d="M 105 90 Q 140 90 170 115 Q 140 100 105 90 Z" fill="#ffffff"/>
-                        <text x="100" y="150" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="900" font-size="65" fill="#ffffff" text-anchor="middle">RGU</text>
-                        <text x="100" y="180" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="2">ABERDEEN</text>
-                    </svg>
+                
+                <!-- RGU Logo Image (Instead of SVG) -->
+                <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-[0_0_15px_rgba(94,39,80,0.5)] group-hover:scale-105 transition-transform duration-500 bg-white">
+                    <img src="rgu-logo.png" alt="RGU Logo" class="w-full h-full object-contain p-1">
                 </div>
+
                 <div class="text-center sm:text-left w-full">
                     <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/30">Undergraduate</span>
                     <h3 class="text-2xl font-bold text-white font-mono mt-3">Robert Gordon University</h3>
