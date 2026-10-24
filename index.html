@@ -8,7 +8,7 @@
     <meta name="description" content="Aspiring BEng (Hons) AI & Data Engineering student at Robert Gordon University, eager to learn and build the future of intelligence.">
     <meta name="theme-color" content="#0a0b10">
     
-    <!-- 🔒 SECURITY: Content Security Policy (CSP) -->
+    <!-- SECURITY: Content Security Policy (CSP) -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https://upload.wikimedia.org; connect-src 'self';">
 
     <!-- Google Fonts -->
@@ -58,125 +58,106 @@
             overflow-x: clip;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            transform: translateZ(0); 
         }
         html { scroll-padding-top: 6rem; }
 
-        /* --- Scroll Progress Bar --- */
-        #scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(to right, #00f0ff, #bd00ff);
-            z-index: 9999;
-            width: 0%;
-            box-shadow: 0 0 10px #00f0ff;
-            transition: width 0.1s ease-out;
-        }
-
+        /* --- FLUID LIQUID GLASS EFFECT --- */
         .glass-panel {
-            background: rgba(18, 20, 32, 0.72);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 240, 255, 0.15);
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.2),
+                0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            overflow: hidden;
             transform: translate3d(0, 0, 0);
             backface-visibility: hidden;
-            will-change: transform, border-color, box-shadow;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Ultra-smooth easing for fluid feel */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
+
+        /* Moving Light Reflection (Liquid Glass Specular Highlight) */
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.06),
+                transparent 40%
+            );
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .glass-panel:hover::before {
+            opacity: 1;
+        }
+
         .glass-panel:hover {
-            border-color: rgba(0, 240, 255, 0.45);
-            box-shadow: 0 10px 30px -5px rgba(0, 240, 255, 0.12);
+            border-color: rgba(0, 240, 255, 0.25);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.15),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.2),
+                0 15px 45px -10px rgba(0, 240, 255, 0.1);
         }
+
         .card-lift:hover {
-            transform: translate3d(0, -6px, 0);
+            transform: translate3d(0, -8px, 0) scale(1.01);
         }
         
-        /* Click Effect */
         .btn-click:active {
             transform: scale(0.95) translateY(0) !important;
         }
 
-        /* Magnetic Button Setup */
+        /* --- FLUID SPRING BUTTONS --- */
         .magnetic {
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Spring physics */
             will-change: transform;
         }
 
-        /* Floating Animation for Terminal */
+        /* --- FLUID BACKGROUND ORBS (Morphing & Moving) --- */
+        @keyframes fluid-blob-1 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            33% { transform: translate(30px, -50px) scale(1.1) rotate(45deg); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            66% { transform: translate(-20px, 20px) scale(0.9) rotate(-45deg); border-radius: 70% 30% 40% 60% / 40% 70% 30% 60%; }
+        }
+        @keyframes fluid-blob-2 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            33% { transform: translate(-50px, 30px) scale(1.05) rotate(-30deg); border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
+            66% { transform: translate(40px, -20px) scale(0.95) rotate(30deg); border-radius: 50% 50% 30% 70% / 50% 40% 60% 50%; }
+        }
+        @keyframes fluid-blob-3 {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+            50% { transform: translate(-30px, 40px) scale(1.2); opacity: 0.15; }
+        }
+
+        .gpu-orb-1 { animation: fluid-blob-1 15s ease-in-out infinite; will-change: transform, border-radius; }
+        .gpu-orb-2 { animation: fluid-blob-2 18s ease-in-out infinite; will-change: transform, border-radius; }
+        .gpu-orb-3 { animation: fluid-blob-3 12s ease-in-out infinite; will-change: transform, opacity; }
+
         @keyframes float {
             0% { transform: translateY(0px) translateZ(0); }
-            50% { transform: translateY(-12px) translateZ(0); }
+            50% { transform: translateY(-10px) translateZ(0); }
             100% { transform: translateY(0px) translateZ(0); }
         }
         .animate-float {
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Animated Scanning Border */
-        .scanning-border {
-            position: relative;
-            overflow: hidden;
-        }
-        .scanning-border::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(transparent, #00f0ff, transparent 30%);
-            animation: rotate-border 4s linear infinite;
-            z-index: -1;
-        }
-        .scanning-border::after {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            background: #121420;
-            border-radius: inherit;
-            z-index: -1;
-        }
-        @keyframes rotate-border {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* --- Button Pulse Effect --- */
-        @keyframes pulse-btn {
-            0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 240, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
-        }
-        .btn-pulse {
-            animation: pulse-btn 2s infinite;
-        }
-
-        /* --- 3D Tilt Card --- */
-        .card-3d {
-            transform-style: preserve-3d;
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
-            transition: transform 0.1s ease-out;
-        }
-        .card-3d:hover {
-            transition: transform 0.1s ease-out;
-        }
-        .card-content {
-            transform: translateZ(30px);
-        }
-
-        .cyber-grid {
-            background-image: linear-gradient(to right, rgba(31, 36, 61, 0.18) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(31, 36, 61, 0.18) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
         .text-glow-cyan { text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3); }
         .text-glow-purple { text-shadow: 0 0 10px rgba(189, 0, 255, 0.6), 0 0 20px rgba(189, 0, 255, 0.3); }
         
         .nav-link {
             position: relative;
-            transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: color;
+            transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .nav-link::after {
             content: '';
@@ -188,8 +169,7 @@
             background: #00f0ff;
             transform: scaleX(0) translateZ(0);
             transform-origin: right;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .nav-link:hover::after,
         .nav-link.active::after {
@@ -201,26 +181,21 @@
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
 
+        /* Fluid Reveal Animation */
         .reveal {
             opacity: 0;
-            transform: translate3d(0, 28px, 0) scale(0.985);
+            transform: translateY(40px) scale(0.98);
             will-change: opacity, transform;
-            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .reveal.is-visible {
             opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
+            transform: translateY(0) scale(1);
         }
-        .delay-100 { transition-delay: 60ms; }
-        .delay-200 { transition-delay: 120ms; }
-        .delay-300 { transition-delay: 180ms; }
-
-        .gpu-orb {
-            transform: translate3d(0, 0, 0);
-            will-change: transform, opacity;
-            pointer-events: none;
-        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
 
         :focus-visible { outline: 2px solid #00f0ff; outline-offset: 3px; }
         ::selection { background: rgba(0, 240, 255, 0.25); }
@@ -240,31 +215,36 @@
         }
     </style>
 </head>
-<body class="cyber-grid min-h-screen relative">
+<body class="min-h-screen relative">
 
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress"></div>
+    <!-- 1. GLOBAL CYBER GRID BACKGROUND (z-0) -->
+    <div class="fixed inset-0 z-0 pointer-events-none opacity-40" style="background-image: linear-gradient(to right, rgba(31, 36, 61, 0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(31, 36, 61, 0.15) 1px, transparent 1px); background-size: 40px 40px;"></div>
 
-    <canvas id="optical-flow-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-60 transform translateZ(0)"></canvas>
+    <!-- 2. GLOBAL PARTICLES CANVAS -->
+    <canvas id="optical-flow-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-90"></canvas>
 
-    <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-cyber-border transform translateZ(0)">
+    <!-- 3. FLUID MORPHING BACKGROUND ORBS (z-0) -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="gpu-orb-1 absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-cyber-cyan rounded-full filter blur-[100px] opacity-15"></div>
+        <div class="gpu-orb-2 absolute bottom-[10%] right-[5%] w-[600px] h-[600px] bg-cyber-purple rounded-full filter blur-[120px] opacity-15"></div>
+        <div class="gpu-orb-3 absolute top-[50%] left-[40%] w-[400px] h-[400px] bg-blue-500 rounded-full filter blur-[100px] opacity-10"></div>
+    </div>
+
+    <!-- Navigation Bar (z-50) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/5 transform translateZ(0)">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20 gap-4">
                 
-                <!-- Social Links (LinkedIn & Instagram) -->
-                <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
-                    <!-- LinkedIn -->
+                <div class="flex items-center space-x-2 sm:space-x-3 shrink-0 relative z-10">
                     <a href="https://www.linkedin.com/in/mansab-mohammed-3688833b2/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/30 flex items-center justify-center text-cyber-cyan hover:bg-cyber-cyan hover:text-cyber-dark transition-all duration-300 shadow-neon-cyan shrink-0 btn-click hover:-translate-y-1">
                         <i class="fa-brands fa-linkedin text-xl"></i>
                     </a>
-                    <!-- Instagram -->
                     <a href="https://www.instagram.com/mansab_amm/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-cyber-purple/10 border border-cyber-purple/30 flex items-center justify-center text-cyber-purple hover:bg-cyber-purple hover:text-white transition-all duration-300 shadow-neon-purple shrink-0 btn-click hover:-translate-y-1">
                         <i class="fa-brands fa-instagram text-xl"></i>
                     </a>
                 </div>
 
-                <div class="hidden md:flex items-center justify-center space-x-4 lg:space-x-8 font-mono text-sm flex-1">
+                <div class="hidden md:flex items-center justify-center space-x-4 lg:space-x-8 font-mono text-sm flex-1 relative z-10">
                     <a href="#about" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">01. About</a>
                     <a href="#skills" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">02. Skills</a>
                     <a href="#goals" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">03. Goals</a>
@@ -272,13 +252,13 @@
                     <a href="#contact" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">05. Contact</a>
                 </div>
 
-                <div class="hidden md:block shrink-0">
+                <div class="hidden md:block shrink-0 relative z-10">
                     <a href="#contact" class="magnetic btn-pulse px-4 lg:px-5 py-2.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider bg-transparent border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-cyber-dark transition-all duration-300 shadow-neon-cyan whitespace-nowrap btn-click inline-block">
                         Initialize Contact
                     </a>
                 </div>
 
-                <div class="md:hidden ml-auto shrink-0">
+                <div class="md:hidden ml-auto shrink-0 relative z-10">
                     <button id="mobile-menu-btn" aria-label="Toggle Menu" class="text-slate-300 hover:text-cyber-cyan focus:outline-none btn-click">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
@@ -286,7 +266,7 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-cyber-border px-4 pt-2 pb-6 space-y-3">
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/5 px-4 pt-2 pb-6 space-y-3 relative z-10">
             <a href="#about" class="block py-2 text-slate-300 hover:text-cyber-cyan font-mono">01. About</a>
             <a href="#skills" class="block py-2 text-slate-300 hover:text-cyber-cyan font-mono">02. Skills</a>
             <a href="#goals" class="block py-2 text-slate-300 hover:text-cyber-cyan font-mono">03. Goals</a>
@@ -295,17 +275,11 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (z-10) -->
     <section class="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 z-10">
-        <!-- Parallax Background Orbs -->
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 overflow-hidden transform translateZ(0)">
-            <div id="orb-1" class="gpu-orb w-[450px] h-[450px] bg-cyber-cyan rounded-full filter blur-[110px] animate-pulse"></div>
-            <div id="orb-2" class="gpu-orb w-[450px] h-[450px] bg-cyber-purple rounded-full filter blur-[110px] animate-pulse [animation-delay:1000ms]"></div>
-        </div>
-
-        <div class="max-w-4xl mx-auto relative z-10 w-full">
+        <div class="max-w-4xl mx-auto relative w-full">
             
-            <div class="text-center mb-8 space-y-4 reveal is-visible">
+            <div class="text-center mb-8 space-y-4 reveal is-visible relative z-10">
                 <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel border border-cyber-cyan/30 text-cyber-cyan font-mono text-[10px] sm:text-sm shadow-neon-cyan text-center leading-tight">
                     <i class="fa-solid fa-microchip animate-spin"></i>
                     <span>SYSTEM ONLINE // AI & Data Engineering Undergraduate</span>
@@ -315,16 +289,16 @@
                 </h1>
             </div>
 
-            <!-- Mac Terminal Window with Floating Animation -->
-            <div class="reveal delay-100 is-visible animate-float w-full max-w-3xl mx-auto rounded-xl overflow-hidden glass-panel border border-cyber-border shadow-[0_0_50px_rgba(0,240,255,0.1)] text-left">
-                <div class="bg-cyber-dark/90 px-4 py-3 flex items-center space-x-2 border-b border-cyber-border">
+            <!-- Mac Terminal Window -->
+            <div class="reveal delay-100 is-visible animate-float w-full max-w-3xl mx-auto rounded-xl overflow-hidden glass-panel text-left relative z-10">
+                <div class="bg-white/5 px-4 py-3 flex items-center space-x-2 border-b border-white/10 relative z-10">
                     <div class="w-3 h-3 rounded-full bg-red-500"></div>
                     <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div class="w-3 h-3 rounded-full bg-green-500"></div>
                     <span class="ml-4 text-xs font-mono text-slate-400 flex-1 text-center">mansab@rgu: ~</span>
                 </div>
                 
-                <div class="p-6 md:p-10 font-mono text-sm sm:text-base space-y-5 h-[280px] sm:h-[250px]">
+                <div class="p-6 md:p-10 font-mono text-sm sm:text-base space-y-5 h-[280px] sm:h-[250px] relative z-10">
                     <div class="flex items-start">
                         <span class="text-cyber-cyan mr-3">➜</span>
                         <span class="text-slate-300">init --student "Mansab Mohammed"</span>
@@ -345,33 +319,33 @@
                 </div>
             </div>
 
-            <div class="reveal delay-200 is-visible flex flex-col sm:flex-row items-center justify-center gap-4 pt-10">
+            <div class="reveal delay-200 is-visible flex flex-col sm:flex-row items-center justify-center gap-4 pt-10 relative z-10">
                 <a href="#goals" class="magnetic w-full sm:w-auto px-8 py-4 rounded-xl font-mono font-bold text-sm bg-gradient-to-r from-cyber-cyan to-blue-600 text-cyber-dark hover:shadow-neon-cyan transition-all duration-300 transform hover:-translate-y-1 text-center btn-click block">
                     <i class="fa-solid fa-bullseye mr-2"></i> My Learning Goals
                 </a>
-                <a href="#contact" class="magnetic w-full sm:w-auto px-8 py-4 rounded-xl font-mono font-bold text-sm glass-panel border border-cyber-border text-white hover:border-cyber-purple hover:shadow-neon-purple transition-all duration-300 transform hover:-translate-y-1 text-center btn-click block">
+                <a href="#contact" class="magnetic w-full sm:w-auto px-8 py-4 rounded-xl font-mono font-bold text-sm glass-panel text-white hover:border-cyber-purple hover:shadow-neon-purple transition-all duration-300 transform hover:-translate-y-1 text-center btn-click block">
                     <i class="fa-solid fa-paper-plane mr-2 text-cyber-purple"></i> Let's Connect
                 </a>
             </div>
 
-            <div class="reveal delay-300 is-visible grid grid-cols-2 sm:grid-cols-3 gap-4 pt-12 max-w-2xl mx-auto">
+            <div class="reveal delay-300 is-visible grid grid-cols-2 sm:grid-cols-3 gap-4 pt-12 max-w-2xl mx-auto relative z-10">
                 <div class="glass-panel card-lift p-4 rounded-xl text-center">
-                    <div class="font-mono text-2xl font-bold text-cyber-cyan">100%</div>
-                    <div class="text-xs text-slate-400 mt-1 font-mono">Eagerness to Learn</div>
+                    <div class="font-mono text-2xl font-bold text-cyber-cyan relative z-10">100%</div>
+                    <div class="text-xs text-slate-400 mt-1 font-mono relative z-10">Eagerness to Learn</div>
                 </div>
                 <div class="glass-panel card-lift p-4 rounded-xl text-center">
-                    <div class="font-mono text-2xl font-bold text-cyber-purple">1st</div>
-                    <div class="text-xs text-slate-400 mt-1 font-mono">Year University Student</div>
+                    <div class="font-mono text-2xl font-bold text-cyber-purple relative z-10">1st</div>
+                    <div class="text-xs text-slate-400 mt-1 font-mono relative z-10">Year University Student</div>
                 </div>
                 <div class="glass-panel card-lift p-4 rounded-xl text-center col-span-2 sm:col-span-1">
-                    <div class="font-mono text-2xl font-bold text-cyber-cyan">Open</div>
-                    <div class="text-xs text-slate-400 mt-1 font-mono">To New Opportunities</div>
+                    <div class="font-mono text-2xl font-bold text-cyber-cyan relative z-10">Open</div>
+                    <div class="text-xs text-slate-400 mt-1 font-mono relative z-10">To New Opportunities</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Section (z-10) -->
     <section id="about" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="space-y-4 mb-16 reveal">
             <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
@@ -382,60 +356,62 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-7 glass-panel card-lift p-8 rounded-2xl space-y-6 border border-cyber-border reveal">
-                <p class="text-slate-300 leading-relaxed text-base sm:text-lg">
-                    I am Mansab Mohammed, an aspiring engineer about to begin my <strong class="text-cyber-cyan font-semibold">Bachelor of Engineering (Honours) in Artificial Intelligence and Data Engineering at Robert Gordon University</strong>. My curiosity lies in understanding how intelligent automation and scalable machine learning frameworks are built from scratch.
-                </p>
-                <p class="text-slate-400 leading-relaxed">
-                    Since I am at the very beginning of my academic journey, I don't have professional projects yet. However, I am dedicating my time to mastering programming fundamentals, mathematics, and data structures to eventually build software that is both rigorous and practical.
-                </p>
+            <div class="lg:col-span-7 glass-panel card-lift p-8 rounded-2xl space-y-6 reveal">
+                <div class="relative z-10 space-y-6">
+                    <p class="text-slate-300 leading-relaxed text-base sm:text-lg">
+                        I am Mansab Mohammed, an aspiring engineer about to begin my <strong class="text-cyber-cyan font-semibold">Bachelor of Engineering (Honours) in Artificial Intelligence and Data Engineering at Robert Gordon University</strong>. My curiosity lies in understanding how intelligent automation and scalable machine learning frameworks are built from scratch.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed">
+                        Since I am at the very beginning of my academic journey, I don't have professional projects yet. However, I am dedicating my time to mastering programming fundamentals, mathematics, and data structures to eventually build software that is both rigorous and practical.
+                    </p>
 
-                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-cyber-border font-mono text-sm">
-                    <div>
-                        <span class="text-slate-500 block">Name:</span>
-                        <span class="text-white font-medium">Mansab Mohammed</span>
-                    </div>
-                    <div>
-                        <span class="text-slate-500 block">Focus:</span>
-                        <span class="text-cyber-cyan font-medium">Learning Foundations</span>
-                    </div>
-                    <div>
-                        <span class="text-slate-500 block">University:</span>
-                        <span class="text-white font-medium">Robert Gordon University</span>
-                    </div>
-                    <div>
-                        <span class="text-slate-500 block">Status:</span>
-                        <span class="text-cyber-purple font-medium">Fresher / Seeking Mentorship</span>
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 font-mono text-sm">
+                        <div>
+                            <span class="text-slate-500 block">Name:</span>
+                            <span class="text-white font-medium">Mansab Mohammed</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">Focus:</span>
+                            <span class="text-cyber-cyan font-medium">Learning Foundations</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">University:</span>
+                            <span class="text-white font-medium">Robert Gordon University</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">Status:</span>
+                            <span class="text-cyber-purple font-medium">Fresher / Seeking Mentorship</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="lg:col-span-5 grid grid-cols-1 gap-4">
-                <div class="glass-panel card-lift p-6 rounded-2xl border border-cyber-cyan/30 flex items-start space-x-4 reveal delay-100">
-                    <div class="p-3 bg-cyber-cyan/10 rounded-xl text-cyber-cyan text-xl">
+                <div class="glass-panel card-lift p-6 rounded-2xl flex items-start space-x-4 reveal delay-100">
+                    <div class="p-3 bg-cyber-cyan/10 rounded-xl text-cyber-cyan text-xl relative z-10">
                         <i class="fa-solid fa-book-open"></i>
                     </div>
-                    <div>
+                    <div class="relative z-10">
                         <h3 class="font-mono font-bold text-white text-lg">Continuous Learning</h3>
                         <p class="text-slate-400 text-sm mt-1">Building strong basics in Python, Mathematics, and Algorithms.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel card-lift p-6 rounded-2xl border border-cyber-purple/30 flex items-start space-x-4 reveal delay-200">
-                    <div class="p-3 bg-cyber-purple/10 rounded-xl text-cyber-purple text-xl">
+                <div class="glass-panel card-lift p-6 rounded-2xl flex items-start space-x-4 reveal delay-200">
+                    <div class="p-3 bg-cyber-purple/10 rounded-xl text-cyber-purple text-xl relative z-10">
                         <i class="fa-solid fa-seedling"></i>
                     </div>
-                    <div>
+                    <div class="relative z-10">
                         <h3 class="font-mono font-bold text-white text-lg">Growth Mindset</h3>
                         <p class="text-slate-400 text-sm mt-1">Ready to take on academic challenges and practical coding tasks.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel card-lift p-6 rounded-2xl border border-blue-500/30 flex items-start space-x-4 reveal delay-300">
-                    <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400 text-xl">
+                <div class="glass-panel card-lift p-6 rounded-2xl flex items-start space-x-4 reveal delay-300">
+                    <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400 text-xl relative z-10">
                         <i class="fa-solid fa-users"></i>
                     </div>
-                    <div>
+                    <div class="relative z-10">
                         <h3 class="font-mono font-bold text-white text-lg">Collaboration</h3>
                         <p class="text-slate-400 text-sm mt-1">Looking forward to joining study groups and open-source communities.</p>
                     </div>
@@ -444,7 +420,7 @@
         </div>
     </section>
 
-    <!-- Skills Section (With 3D Tilt) -->
+    <!-- Skills Section (z-10) -->
     <section id="skills" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="space-y-4 mb-16 reveal">
             <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
@@ -455,9 +431,8 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- 3D Tilt Card 1 -->
-            <div class="card-3d glass-panel p-8 rounded-2xl border border-cyber-cyan/20 space-y-6 hover:shadow-neon-cyan reveal">
-                <div class="card-content flex items-center space-x-3">
+            <div class="glass-panel card-lift p-8 rounded-2xl space-y-6 reveal">
+                <div class="relative z-10 flex items-center space-x-3">
                     <div class="w-12 h-12 rounded-xl bg-cyber-cyan/10 flex items-center justify-center text-cyber-cyan text-xl">
                         <i class="fa-solid fa-code"></i>
                     </div>
@@ -466,17 +441,16 @@
                         <span class="text-xs text-cyber-cyan font-mono">Starting With</span>
                     </div>
                 </div>
-                <div class="card-content flex flex-wrap gap-2 pt-2">
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Python (Beginner)</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">HTML/CSS (Basics)</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Problem Solving</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Git & GitHub</span>
+                <div class="relative z-10 flex flex-wrap gap-2 pt-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Python (Beginner)</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">HTML/CSS (Basics)</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Problem Solving</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Git & GitHub</span>
                 </div>
             </div>
 
-            <!-- 3D Tilt Card 2 -->
-            <div class="card-3d glass-panel p-8 rounded-2xl border border-cyber-purple/20 space-y-6 hover:shadow-neon-purple reveal delay-100">
-                <div class="card-content flex items-center space-x-3">
+            <div class="glass-panel card-lift p-8 rounded-2xl space-y-6 reveal delay-100">
+                <div class="relative z-10 flex items-center space-x-3">
                     <div class="w-12 h-12 rounded-xl bg-cyber-purple/10 flex items-center justify-center text-cyber-purple text-xl">
                         <i class="fa-solid fa-brain"></i>
                     </div>
@@ -485,17 +459,16 @@
                         <span class="text-xs text-cyber-purple font-mono">University Focus</span>
                     </div>
                 </div>
-                <div class="card-content flex flex-wrap gap-2 pt-2">
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Math for ML</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Basic Algorithms</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Data Structures</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Machine Learning 101</span>
+                <div class="relative z-10 flex flex-wrap gap-2 pt-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Math for ML</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Basic Algorithms</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Data Structures</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Machine Learning 101</span>
                 </div>
             </div>
 
-            <!-- 3D Tilt Card 3 -->
-            <div class="card-3d glass-panel p-8 rounded-2xl border border-blue-500/20 space-y-6 hover:shadow-glow reveal delay-200">
-                <div class="card-content flex items-center space-x-3">
+            <div class="glass-panel card-lift p-8 rounded-2xl space-y-6 reveal delay-200">
+                <div class="relative z-10 flex items-center space-x-3">
                     <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-xl">
                         <i class="fa-solid fa-database"></i>
                     </div>
@@ -504,17 +477,17 @@
                         <span class="text-xs text-blue-400 font-mono">Next Steps</span>
                     </div>
                 </div>
-                <div class="card-content flex flex-wrap gap-2 pt-2">
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">SQL Basics</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Excel / Spreadsheets</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Data Logic</span>
-                    <span class="px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Statistics</span>
+                <div class="relative z-10 flex flex-wrap gap-2 pt-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">SQL Basics</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Excel / Spreadsheets</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Data Logic</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Statistics</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Goals Section -->
+    <!-- Goals Section (z-10) -->
     <section id="goals" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="space-y-4 mb-16 reveal">
             <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
@@ -526,8 +499,8 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="glass-panel card-lift rounded-2xl overflow-hidden border border-cyber-border flex flex-col justify-between group hover:border-cyber-cyan reveal">
-                <div class="p-8 space-y-6">
+            <div class="glass-panel card-lift rounded-2xl overflow-hidden flex flex-col justify-between group reveal">
+                <div class="relative z-10 p-8 space-y-6">
                     <div class="flex items-center justify-between">
                         <div class="w-12 h-12 rounded-xl bg-cyber-cyan/10 flex items-center justify-center text-cyber-cyan text-xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
                             <i class="fa-solid fa-flag-checkered"></i>
@@ -543,13 +516,13 @@
                         Build a strong foundation in Python programming, linear algebra, and statistics. Complete 10+ coding challenges on LeetCode or HackerRank.
                     </p>
                 </div>
-                <div class="px-8 py-4 bg-cyber-dark/50 border-t border-cyber-border flex items-center justify-between font-mono text-xs">
+                <div class="relative z-10 px-8 py-4 bg-white/5 border-t border-white/10 flex items-center justify-between font-mono text-xs">
                     <span class="text-slate-500">Status: In Progress</span>
                 </div>
             </div>
 
-            <div class="glass-panel card-lift rounded-2xl overflow-hidden border border-cyber-border flex flex-col justify-between group hover:border-cyber-purple reveal delay-100">
-                <div class="p-8 space-y-6">
+            <div class="glass-panel card-lift rounded-2xl overflow-hidden flex flex-col justify-between group reveal delay-100">
+                <div class="relative z-10 p-8 space-y-6">
                     <div class="flex items-center justify-between">
                         <div class="w-12 h-12 rounded-xl bg-cyber-purple/10 flex items-center justify-center text-cyber-purple text-xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
                             <i class="fa-solid fa-hammer"></i>
@@ -565,14 +538,14 @@
                         Create a simple data analysis project or a basic machine learning model (like predicting housing prices or analyzing a dataset) to apply what I learn in class.
                     </p>
                 </div>
-                <div class="px-8 py-4 bg-cyber-dark/50 border-t border-cyber-border flex items-center justify-between font-mono text-xs">
+                <div class="relative z-10 px-8 py-4 bg-white/5 border-t border-white/10 flex items-center justify-between font-mono text-xs">
                     <span class="text-slate-500">Status: Coming Soon...</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Section (Animated Border) -->
+    <!-- Education Section (z-10) -->
     <section id="education" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="space-y-4 mb-16 reveal">
             <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
@@ -582,55 +555,53 @@
             <h2 class="text-3xl sm:text-4xl font-bold text-white font-mono">Education & Qualification</h2>
         </div>
 
-        <div class="max-w-3xl mx-auto scanning-border rounded-2xl relative reveal group">
-            <div class="glass-panel p-8 sm:p-10 rounded-2xl relative overflow-hidden">
-                <div class="gpu-orb absolute -right-12 -bottom-12 w-48 h-48 bg-cyber-cyan/10 rounded-full filter blur-3xl animate-pulse"></div>
-                
-                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6 pb-6 border-b border-cyber-border">
-                    <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-[0_0_15px_rgba(94,39,80,0.5)] group-hover:scale-105 transition-transform duration-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full">
-                            <rect width="200" height="200" fill="#5b2652"/>
-                            <path d="M 25 85 Q 60 50 95 70 T 175 65 Q 130 95 90 85 T 25 85 Z" fill="#ffffff"/>
-                            <path d="M 105 90 Q 140 90 170 115 Q 140 100 105 90 Z" fill="#ffffff"/>
-                            <text x="100" y="150" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="900" font-size="65" fill="#ffffff" text-anchor="middle">RGU</text>
-                            <text x="100" y="180" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="2">ABERDEEN</text>
-                        </svg>
-                    </div>
-                    <div class="text-center sm:text-left">
-                        <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/30">Undergraduate</span>
-                        <h3 class="text-2xl font-bold text-white font-mono mt-3">Robert Gordon University</h3>
-                        <!-- UPDATED TEXT HERE -->
-                        <p class="text-cyber-cyan font-mono text-sm mt-1">Bachelor of Engineering (Honours) in Artificial Intelligence and Data Engineering</p>
-                    </div>
+        <div class="max-w-3xl mx-auto glass-panel card-lift p-8 sm:p-10 rounded-2xl relative overflow-hidden reveal">
+            
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6 pb-6 border-b border-white/10 relative z-10">
+                <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-[0_0_15px_rgba(94,39,80,0.5)] group-hover:scale-105 transition-transform duration-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full">
+                        <rect width="200" height="200" fill="#5b2652"/>
+                        <path d="M 25 85 Q 60 50 95 70 T 175 65 Q 130 95 90 85 T 25 85 Z" fill="#ffffff"/>
+                        <path d="M 105 90 Q 140 90 170 115 Q 140 100 105 90 Z" fill="#ffffff"/>
+                        <text x="100" y="150" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="900" font-size="65" fill="#ffffff" text-anchor="middle">RGU</text>
+                        <text x="100" y="180" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="2">ABERDEEN</text>
+                    </svg>
                 </div>
+                <div class="text-center sm:text-left w-full">
+                    <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/30">Undergraduate</span>
+                    <h3 class="text-2xl font-bold text-white font-mono mt-3">Robert Gordon University</h3>
+                    <p class="text-cyber-cyan font-mono text-sm mt-2 leading-relaxed">
+                        Bachelor of Engineering (Honours) in Artificial Intelligence and Data Engineering
+                    </p>
+                </div>
+            </div>
 
-                <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                    Preparing to embark on a comprehensive curriculum focusing on advanced mathematics for machine learning, data structures, algorithm design, big data architectures, neural networks, and scalable database systems.
-                </p>
+            <p class="relative z-10 text-slate-300 text-sm leading-relaxed mb-6">
+                Preparing to embark on a comprehensive curriculum focusing on advanced mathematics for machine learning, data structures, algorithm design, big data architectures, neural networks, and scalable database systems.
+            </p>
 
-                <div class="border-t border-cyber-border pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
-                    <div class="flex items-center space-x-3 text-slate-300">
-                        <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
-                        <span>Machine Learning & Deep Learning</span>
-                    </div>
-                    <div class="flex items-center space-x-3 text-slate-300">
-                        <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
-                        <span>Distributed Data Processing</span>
-                    </div>
-                    <div class="flex items-center space-x-3 text-slate-300">
-                        <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
-                        <span>Software Engineering Principles</span>
-                    </div>
-                    <div class="flex items-center space-x-3 text-slate-300">
-                        <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
-                        <span>Advanced Data Structures & Algorithms</span>
-                    </div>
+            <div class="relative z-10 border-t border-white/10 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
+                <div class="flex items-center space-x-3 text-slate-300">
+                    <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
+                    <span>Machine Learning & Deep Learning</span>
+                </div>
+                <div class="flex items-center space-x-3 text-slate-300">
+                    <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
+                    <span>Distributed Data Processing</span>
+                </div>
+                <div class="flex items-center space-x-3 text-slate-300">
+                    <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
+                    <span>Software Engineering Principles</span>
+                </div>
+                <div class="flex items-center space-x-3 text-slate-300">
+                    <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
+                    <span>Advanced Data Structures & Algorithms</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section (z-10) -->
     <section id="contact" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div class="space-y-4 mb-12 text-center reveal">
             <div class="flex justify-center items-center space-x-2 font-mono text-cyber-cyan text-sm tracking-widest uppercase">
@@ -642,8 +613,8 @@
             <p class="text-slate-400 max-w-lg mx-auto text-sm">Want to mentor me, collaborate on a beginner project, or just say hi? Reach out directly.</p>
         </div>
 
-        <div class="glass-panel p-10 sm:p-14 rounded-2xl border border-cyber-border relative reveal delay-100 text-center">
-            <div class="space-y-6">
+        <div class="glass-panel p-10 sm:p-14 rounded-2xl relative reveal delay-100 text-center">
+            <div class="relative z-10 space-y-6">
                 
                 <div class="pt-2">
                     <h3 class="font-mono text-2xl font-bold text-white mb-3">Connect with me</h3>
@@ -653,13 +624,11 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 pt-4">
-                    <!-- Instagram Button -->
                     <a href="https://www.instagram.com/mansab_amm/" target="_blank" rel="noopener noreferrer" class="magnetic inline-flex items-center justify-center space-x-3 px-8 py-5 rounded-xl font-mono font-bold text-sm sm:text-base bg-gradient-to-r from-cyber-purple to-pink-600 text-white hover:shadow-neon-purple transition-all transform hover:-translate-y-1 tracking-wider w-full sm:w-auto btn-click">
                         <i class="fa-brands fa-instagram text-lg"></i>
                         <span>mansab_amm</span>
                     </a>
 
-                    <!-- Email Button -->
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mansabamm29@gmail.com" target="_blank" rel="noopener noreferrer" class="magnetic inline-flex items-center justify-center space-x-3 px-8 py-5 rounded-xl font-mono font-bold text-sm sm:text-base bg-gradient-to-r from-cyber-cyan to-blue-600 text-cyber-dark hover:shadow-neon-cyan transition-all transform hover:-translate-y-1 lowercase tracking-wider w-full sm:w-auto btn-click">
                         <i class="fa-regular fa-envelope text-lg"></i>
                         <span>mansabamm29@gmail.com</span>
@@ -669,8 +638,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="relative z-10 border-t border-cyber-border py-12 px-4 sm:px-6 lg:px-8 text-center font-mono text-xs text-slate-400 space-y-4 mt-12">
+    <!-- Footer (z-10) -->
+    <footer class="relative z-10 border-t border-white/5 py-12 px-4 sm:px-6 lg:px-8 text-center font-mono text-xs text-slate-400 space-y-4 mt-12">
         <div class="flex items-center justify-center space-x-6 text-lg">
             <a href="https://www.linkedin.com/in/mansab-mohammed-3688833b2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate-400 hover:text-cyber-cyan transition-all duration-300 hover:-translate-y-1">
                 <i class="fa-brands fa-linkedin"></i>
@@ -688,7 +657,7 @@
         <p>&copy; 2026 Mansab Mohammed | Aspiring AI & Data Engineering Student. All systems operational.</p>
     </footer>
 
-    <!-- Scroll to Top Button -->
+    <!-- Scroll to Top Button (z-50) -->
     <button id="scrollToTopBtn" aria-label="Scroll to top" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-cyber-cyan text-cyber-dark rounded-full flex items-center justify-center shadow-neon-cyan opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4 hover:bg-white hover:scale-110 btn-click">
         <i class="fa-solid fa-arrow-up text-xl"></i>
     </button>
@@ -716,13 +685,13 @@
             }
             resize();
 
-            const particleCount = Math.min(30, Math.floor(width / 45)); 
+            const particleCount = Math.min(80, Math.floor(width / 25)); 
             const particles = Array.from({ length: particleCount }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.45,
-                vy: (Math.random() - 0.5) * 0.45 - 0.15,
-                radius: Math.random() * 1.6 + 0.8,
+                vx: (Math.random() - 0.5) * 0.6, 
+                vy: (Math.random() - 0.5) * 0.6 - 0.15,
+                radius: Math.random() * 2 + 1,   
                 hue: Math.random() > 0.35 ? '#00f0ff' : '#bd00ff'
             }));
 
@@ -752,7 +721,10 @@
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.radius, 0, TWO_PI);
                     ctx.fillStyle = p.hue;
+                    ctx.shadowBlur = 15;       
+                    ctx.shadowColor = p.hue;   
                     ctx.fill();
+                    ctx.shadowBlur = 0;        
 
                     for (let j = i + 1; j < particles.length; j++) {
                         const p2 = particles[j];
@@ -760,13 +732,13 @@
                         const dy = p.y - p2.y;
                         const distSq = dx * dx + dy * dy;
 
-                        if (distSq < 18000) {
-                            const alpha = (1 - distSq / 18000) * 0.18;
+                        if (distSq < 25000) { 
+                            const alpha = (1 - distSq / 25000) * 0.4; 
                             ctx.beginPath();
                             ctx.moveTo(p.x, p.y);
                             ctx.lineTo(p2.x, p2.y);
                             ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
-                            ctx.lineWidth = 0.8;
+                            ctx.lineWidth = 1;
                             ctx.stroke();
                         }
                     }
@@ -776,7 +748,20 @@
             requestAnimationFrame(renderFrame);
         })();
 
-        // 2. Magnetic Buttons Effect
+        // 2. Fluid Glass Light Reflection (Mouse Tracking)
+        document.querySelectorAll('.glass-panel').forEach(panel => {
+            panel.addEventListener('mousemove', (e) => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Update CSS variables for the radial gradient highlight
+                panel.style.setProperty('--mouse-x', `${x}px`);
+                panel.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // 3. Magnetic Buttons Effect
         const magneticBtns = document.querySelectorAll('.magnetic');
         magneticBtns.forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
@@ -790,46 +775,7 @@
             });
         });
 
-        // 3. 3D Tilt Effect for Cards
-        const tiltCards = document.querySelectorAll('.card-3d');
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -10;
-                const rotateY = ((x - centerX) / centerX) * 10;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            });
-        });
-
-        // 4. Scroll Progress Bar & Parallax
-        const scrollProgress = document.getElementById('scroll-progress');
-        const orb1 = document.getElementById('orb-1');
-        const orb2 = document.getElementById('orb-2');
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = `${scrollPercent}%`;
-
-            if (orb1 && orb2) {
-                orb1.style.transform = `translateY(${scrollTop * 0.2}px) translateZ(0)`;
-                orb2.style.transform = `translateY(${scrollTop * 0.4}px) translateZ(0)`;
-            }
-        }, { passive: true });
-
-        // 5. Smooth Scroll
+        // 4. Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -843,7 +789,7 @@
             });
         });
 
-        // 6. Mobile Menu
+        // 5. Mobile Menu
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -857,7 +803,7 @@
             });
         });
 
-        // 7. Typing Effect
+        // 6. Typing Effect
         const typedEl = document.getElementById('typed-text');
         const words = [
             'Machine Learning Basics.',
@@ -881,7 +827,7 @@
             setTimeout(tick, delay);
         })();
 
-        // 8. Scroll Spy & Reveal
+        // 7. Scroll Spy & Reveal
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section[id]');
         const revealElements = document.querySelectorAll('.reveal');
@@ -910,7 +856,890 @@
 
         sections.forEach(sec => navObserver.observe(sec));
 
-        // 9. Scroll to Top
+        // 8. Scroll to Top
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        let isScrollingTick = false;
+
+        window.addEventListener('scroll', () => {
+            if (!isScrollingTick) {
+                window.requestAnimationFrame(() => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                        scrollToTopBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    } else {
+                        scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                        scrollToTopBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    }
+                    isScrollingTick = false;
+                });
+                isScrollingTick = true;
+            }
+        }, { passive: true });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mansab Mohammed | Aspiring AI & Data Engineer</title>
+
+    <meta name="description" content="Aspiring BEng (Hons) AI & Data Engineering student at Robert Gordon University, eager to learn and build the future of intelligence.">
+    <meta name="theme-color" content="#0a0b10">
+    
+    <!-- SECURITY: Content Security Policy (CSP) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https://upload.wikimedia.org; connect-src 'self';">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            cyan: '#00f0ff',
+                            purple: '#bd00ff',
+                            dark: '#0a0b10',
+                            card: '#121420',
+                            border: '#1f243d'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'monospace'],
+                        mono: ['Fira Code', 'Space Grotesk', 'monospace'],
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 20px rgba(0, 240, 255, 0.3)',
+                        'neon-purple': '0 0 20px rgba(189, 0, 255, 0.3)',
+                        'glow': '0 0 30px rgba(0, 240, 255, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0a0b10;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        html { scroll-padding-top: 6rem; }
+
+        /* --- FLUID LIQUID GLASS EFFECT --- */
+        .glass-panel {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.2),
+                0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            /* Ultra-smooth easing for fluid feel */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Moving Light Reflection (Liquid Glass Specular Highlight) */
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.06),
+                transparent 40%
+            );
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .glass-panel:hover::before {
+            opacity: 1;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 240, 255, 0.25);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.15),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.2),
+                0 15px 45px -10px rgba(0, 240, 255, 0.1);
+        }
+
+        .card-lift:hover {
+            transform: translate3d(0, -8px, 0) scale(1.01);
+        }
+        
+        .btn-click:active {
+            transform: scale(0.95) translateY(0) !important;
+        }
+
+        /* --- FLUID SPRING BUTTONS --- */
+        .magnetic {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Spring physics */
+            will-change: transform;
+        }
+
+        /* --- FLUID BACKGROUND ORBS (Morphing & Moving) --- */
+        @keyframes fluid-blob-1 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            33% { transform: translate(30px, -50px) scale(1.1) rotate(45deg); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            66% { transform: translate(-20px, 20px) scale(0.9) rotate(-45deg); border-radius: 70% 30% 40% 60% / 40% 70% 30% 60%; }
+        }
+        @keyframes fluid-blob-2 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            33% { transform: translate(-50px, 30px) scale(1.05) rotate(-30deg); border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
+            66% { transform: translate(40px, -20px) scale(0.95) rotate(30deg); border-radius: 50% 50% 30% 70% / 50% 40% 60% 50%; }
+        }
+        @keyframes fluid-blob-3 {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+            50% { transform: translate(-30px, 40px) scale(1.2); opacity: 0.15; }
+        }
+
+        .gpu-orb-1 { animation: fluid-blob-1 15s ease-in-out infinite; will-change: transform, border-radius; }
+        .gpu-orb-2 { animation: fluid-blob-2 18s ease-in-out infinite; will-change: transform, border-radius; }
+        .gpu-orb-3 { animation: fluid-blob-3 12s ease-in-out infinite; will-change: transform, opacity; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) translateZ(0); }
+            50% { transform: translateY(-10px) translateZ(0); }
+            100% { transform: translateY(0px) translateZ(0); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .text-glow-cyan { text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3); }
+        .text-glow-purple { text-shadow: 0 0 10px rgba(189, 0, 255, 0.6), 0 0 20px rgba(189, 0, 255, 0.3); }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            background: #00f0ff;
+            transform: scaleX(0) translateZ(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: scaleX(1) translateZ(0);
+            transform-origin: left;
+        }
+        .nav-link.active {
+            color: #00f0ff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Fluid Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            will-change: opacity, transform;
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        :focus-visible { outline: 2px solid #00f0ff; outline-offset: 3px; }
+        ::selection { background: rgba(0, 240, 255, 0.25); }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0b10; }
+        ::-webkit-scrollbar-thumb { background: #1f243d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen relative">
+
+    <!-- 1. GLOBAL CYBER GRID BACKGROUND (z-0) -->
+    <div class="fixed inset-0 z-0 pointer-events-none opacity-40" style="background-image: linear-gradient(to right, rgba(31, 36, 61, 0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(31, 36, 61, 0.15) 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <!-- 2. GLOBAL PARTICLES CANVAS -->
+    <canvas id="optical-flow-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-90"></canvas>
+
+    <!-- 3. FLUID MORPHING BACKGROUND ORBS (z-0) -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="gpu-orb-1 absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-cyber-cyan rounded-full filter blur-[100px] opacity-15"></div>
+        <div class="gpu-orb-2 absolute bottom-[10%] right-[5%] w-[600px] h-[600px] bg-cyber-purple rounded-full filter blur-[120px] opacity-15"></div>
+        <div class="gpu-orb-3 absolute top-[50%] left-[40%] w-[400px] h-[400px] bg-blue-500 rounded-full filter blur-[100px] opacity-10"></div>
+    </div>
+
+    <!-- Navigation Bar (z-50) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/5 transform translateZ(0)">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-4">
+                
+                <div class="flex items-center space-x-2 sm:space-x-3 shrink-0 relative z-10">
+                    <a href="https://www.linkedin.com/in/mansab-mohammed-3688833b2/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/30 flex items-center justify-center text-cyber-cyan hover:bg-cyber-cyan hover:text-cyber-dark transition-all duration-300 shadow-neon-cyan shrink-0 btn-click hover:-translate-y-1">
+                        <i class="fa-brands fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/mansab_amm/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-cyber-purple/10 border border-cyber-purple/30 flex items-center justify-center text-cyber-purple hover:bg-cyber-purple hover:text-white transition-all duration-300 shadow-neon-purple shrink-0 btn-click hover:-translate-y-1">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center justify-center space-x-4 lg:space-x-8 font-mono text-sm flex-1 relative z-10">
+                    <a href="#about" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">01. About</a>
+                    <a href="#skills" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">02. Skills</a>
+                    <a href="#goals" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">03. Goals</a>
+                    <a href="#education" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">04. Education</a>
+                    <a href="#contact" class="nav-link text-slate-300 hover:text-cyber-cyan whitespace-nowrap">05. Contact</a>
+                </div>
+
+                <div class="hidden md:block shrink-0 relative z-10">
+                    <a href="#contact" class="magnetic btn-pulse px-4 lg:px-5 py-2.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider bg-transparent border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-cyber-dark transition-all duration-300 shadow-neon-cyan whitespace-nowrap btn-click inline-block">
+                        Initialize Contact
+                    </a>
+                </div>
+
+                <div class="md:hidden ml-auto shrink-0 relative z-10">
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="text-slate-300 hover:text-cyber-cyan focus:outline-none btn-click">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/5 px-4 pt-2 pb-6 space-y-3 relative z-10">
+            <a href="#about" class="block py-2 text-slate-300 hover:text-cyber-cyan font-mono">01. About</a>
+            <a href="#skills" class="block py-2 text-slate-300 hover:text-cyber-cyan font-mono">02. Skills</a>
+            <a href="#goals" class="block py-2 text-slate-300 hover:text-cyber-cyan font-mono">03. Goals</a>
+            <a href="#education" class="block py-2 text-slate-300 hover:text-cyber-cyan font-mono">04. Education</a>
+            <a href="#contact" class="block py-2 text-slate-300 hover:text-cyber-cyan font-mono">05. Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section (z-10) -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 z-10">
+        <div class="max-w-4xl mx-auto relative w-full">
+            
+            <div class="text-center mb-8 space-y-4 reveal is-visible relative z-10">
+                <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel border border-cyber-cyan/30 text-cyber-cyan font-mono text-[10px] sm:text-sm shadow-neon-cyan text-center leading-tight">
+                    <i class="fa-solid fa-microchip animate-spin"></i>
+                    <span>SYSTEM ONLINE // AI & Data Engineering Undergraduate</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-mono leading-tight">
+                    Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan to-cyber-purple text-glow-cyan">Mansab Mohammed</span>
+                </h1>
+            </div>
+
+            <!-- Mac Terminal Window -->
+            <div class="reveal delay-100 is-visible animate-float w-full max-w-3xl mx-auto rounded-xl overflow-hidden glass-panel text-left relative z-10">
+                <div class="bg-white/5 px-4 py-3 flex items-center space-x-2 border-b border-white/10 relative z-10">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-4 text-xs font-mono text-slate-400 flex-1 text-center">mansab@rgu: ~</span>
+                </div>
+                
+                <div class="p-6 md:p-10 font-mono text-sm sm:text-base space-y-5 h-[280px] sm:h-[250px] relative z-10">
+                    <div class="flex items-start">
+                        <span class="text-cyber-cyan mr-3">➜</span>
+                        <span class="text-slate-300">init --student "Mansab Mohammed"</span>
+                    </div>
+                    
+                    <div class="text-slate-400 pl-7">
+                        I am a highly motivated student just starting my journey into Artificial Intelligence and Data Engineering at Robert Gordon University.
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="text-cyber-cyan mr-3">➜</span>
+                        <span class="text-slate-300">learning --focus</span>
+                    </div>
+                    
+                    <div class="flex items-start pl-7">
+                        <span id="typed-text" class="text-cyber-purple font-semibold text-glow-purple border-r-2 border-cyber-purple pr-1 animate-pulse"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal delay-200 is-visible flex flex-col sm:flex-row items-center justify-center gap-4 pt-10 relative z-10">
+                <a href="#goals" class="magnetic w-full sm:w-auto px-8 py-4 rounded-xl font-mono font-bold text-sm bg-gradient-to-r from-cyber-cyan to-blue-600 text-cyber-dark hover:shadow-neon-cyan transition-all duration-300 transform hover:-translate-y-1 text-center btn-click block">
+                    <i class="fa-solid fa-bullseye mr-2"></i> My Learning Goals
+                </a>
+                <a href="#contact" class="magnetic w-full sm:w-auto px-8 py-4 rounded-xl font-mono font-bold text-sm glass-panel text-white hover:border-cyber-purple hover:shadow-neon-purple transition-all duration-300 transform hover:-translate-y-1 text-center btn-click block">
+                    <i class="fa-solid fa-paper-plane mr-2 text-cyber-purple"></i> Let's Connect
+                </a>
+            </div>
+
+            <div class="reveal delay-300 is-visible grid grid-cols-2 sm:grid-cols-3 gap-4 pt-12 max-w-2xl mx-auto relative z-10">
+                <div class="glass-panel card-lift p-4 rounded-xl text-center">
+                    <div class="font-mono text-2xl font-bold text-cyber-cyan relative z-10">100%</div>
+                    <div class="text-xs text-slate-400 mt-1 font-mono relative z-10">Eagerness to Learn</div>
+                </div>
+                <div class="glass-panel card-lift p-4 rounded-xl text-center">
+                    <div class="font-mono text-2xl font-bold text-cyber-purple relative z-10">1st</div>
+                    <div class="text-xs text-slate-400 mt-1 font-mono relative z-10">Year University Student</div>
+                </div>
+                <div class="glass-panel card-lift p-4 rounded-xl text-center col-span-2 sm:col-span-1">
+                    <div class="font-mono text-2xl font-bold text-cyber-cyan relative z-10">Open</div>
+                    <div class="text-xs text-slate-400 mt-1 font-mono relative z-10">To New Opportunities</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (z-10) -->
+    <section id="about" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="space-y-4 mb-16 reveal">
+            <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
+                <span class="w-8 h-[1px] bg-cyber-cyan"></span>
+                <span>01. Background Profile</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white font-mono">About Me</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7 glass-panel card-lift p-8 rounded-2xl space-y-6 reveal">
+                <div class="relative z-10 space-y-6">
+                    <p class="text-slate-300 leading-relaxed text-base sm:text-lg">
+                        I am Mansab Mohammed, an aspiring engineer about to begin my <strong class="text-cyber-cyan font-semibold">Bachelor of Engineering (Honours) in Artificial Intelligence and Data Engineering at Robert Gordon University</strong>. My curiosity lies in understanding how intelligent automation and scalable machine learning frameworks are built from scratch.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed">
+                        Since I am at the very beginning of my academic journey, I don't have professional projects yet. However, I am dedicating my time to mastering programming fundamentals, mathematics, and data structures to eventually build software that is both rigorous and practical.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 font-mono text-sm">
+                        <div>
+                            <span class="text-slate-500 block">Name:</span>
+                            <span class="text-white font-medium">Mansab Mohammed</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">Focus:</span>
+                            <span class="text-cyber-cyan font-medium">Learning Foundations</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">University:</span>
+                            <span class="text-white font-medium">Robert Gordon University</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">Status:</span>
+                            <span class="text-cyber-purple font-medium">Fresher / Seeking Mentorship</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 grid grid-cols-1 gap-4">
+                <div class="glass-panel card-lift p-6 rounded-2xl flex items-start space-x-4 reveal delay-100">
+                    <div class="p-3 bg-cyber-cyan/10 rounded-xl text-cyber-cyan text-xl relative z-10">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-mono font-bold text-white text-lg">Continuous Learning</h3>
+                        <p class="text-slate-400 text-sm mt-1">Building strong basics in Python, Mathematics, and Algorithms.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel card-lift p-6 rounded-2xl flex items-start space-x-4 reveal delay-200">
+                    <div class="p-3 bg-cyber-purple/10 rounded-xl text-cyber-purple text-xl relative z-10">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-mono font-bold text-white text-lg">Growth Mindset</h3>
+                        <p class="text-slate-400 text-sm mt-1">Ready to take on academic challenges and practical coding tasks.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel card-lift p-6 rounded-2xl flex items-start space-x-4 reveal delay-300">
+                    <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400 text-xl relative z-10">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="font-mono font-bold text-white text-lg">Collaboration</h3>
+                        <p class="text-slate-400 text-sm mt-1">Looking forward to joining study groups and open-source communities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (z-10) -->
+    <section id="skills" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="space-y-4 mb-16 reveal">
+            <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
+                <span class="w-8 h-[1px] bg-cyber-cyan"></span>
+                <span>02. Learning Roadmap</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white font-mono">Skills I'm Building</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-panel card-lift p-8 rounded-2xl space-y-6 reveal">
+                <div class="relative z-10 flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-cyan/10 flex items-center justify-center text-cyber-cyan text-xl">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-mono font-bold text-white text-xl">Programming</h3>
+                        <span class="text-xs text-cyber-cyan font-mono">Starting With</span>
+                    </div>
+                </div>
+                <div class="relative z-10 flex flex-wrap gap-2 pt-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Python (Beginner)</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">HTML/CSS (Basics)</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Problem Solving</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-cyan hover:text-cyber-cyan transition-colors cursor-default">Git & GitHub</span>
+                </div>
+            </div>
+
+            <div class="glass-panel card-lift p-8 rounded-2xl space-y-6 reveal delay-100">
+                <div class="relative z-10 flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-purple/10 flex items-center justify-center text-cyber-purple text-xl">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-mono font-bold text-white text-xl">AI Concepts</h3>
+                        <span class="text-xs text-cyber-purple font-mono">University Focus</span>
+                    </div>
+                </div>
+                <div class="relative z-10 flex flex-wrap gap-2 pt-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Math for ML</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Basic Algorithms</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Data Structures</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-cyber-purple hover:text-cyber-purple transition-colors cursor-default">Machine Learning 101</span>
+                </div>
+            </div>
+
+            <div class="glass-panel card-lift p-8 rounded-2xl space-y-6 reveal delay-200">
+                <div class="relative z-10 flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-xl">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-mono font-bold text-white text-xl">Data Engineering</h3>
+                        <span class="text-xs text-blue-400 font-mono">Next Steps</span>
+                    </div>
+                </div>
+                <div class="relative z-10 flex flex-wrap gap-2 pt-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">SQL Basics</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Excel / Spreadsheets</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Data Logic</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors cursor-default">Statistics</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals Section (z-10) -->
+    <section id="goals" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="space-y-4 mb-16 reveal">
+            <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
+                <span class="w-8 h-[1px] bg-cyber-cyan"></span>
+                <span>03. Future Plans</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white font-mono">My Learning Milestones</h2>
+            <p class="text-slate-400">Since I haven't built projects yet, here is what I am working towards.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="glass-panel card-lift rounded-2xl overflow-hidden flex flex-col justify-between group reveal">
+                <div class="relative z-10 p-8 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div class="w-12 h-12 rounded-xl bg-cyber-cyan/10 flex items-center justify-center text-cyber-cyan text-xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
+                            <i class="fa-solid fa-flag-checkered"></i>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan font-mono text-xs border border-cyber-cyan/30">Goal 1 (Year 1)</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white font-mono group-hover:text-cyber-cyan transition-colors">
+                        Master Python & Math Basics
+                    </h3>
+                    
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Build a strong foundation in Python programming, linear algebra, and statistics. Complete 10+ coding challenges on LeetCode or HackerRank.
+                    </p>
+                </div>
+                <div class="relative z-10 px-8 py-4 bg-white/5 border-t border-white/10 flex items-center justify-between font-mono text-xs">
+                    <span class="text-slate-500">Status: In Progress</span>
+                </div>
+            </div>
+
+            <div class="glass-panel card-lift rounded-2xl overflow-hidden flex flex-col justify-between group reveal delay-100">
+                <div class="relative z-10 p-8 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div class="w-12 h-12 rounded-xl bg-cyber-purple/10 flex items-center justify-center text-cyber-purple text-xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-cyber-purple/10 text-cyber-purple font-mono text-xs border border-cyber-purple/30">Goal 2 (Future)</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white font-mono group-hover:text-cyber-purple transition-colors">
+                        Build My First AI/Data Project
+                    </h3>
+                    
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Create a simple data analysis project or a basic machine learning model (like predicting housing prices or analyzing a dataset) to apply what I learn in class.
+                    </p>
+                </div>
+                <div class="relative z-10 px-8 py-4 bg-white/5 border-t border-white/10 flex items-center justify-between font-mono text-xs">
+                    <span class="text-slate-500">Status: Coming Soon...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section (z-10) -->
+    <section id="education" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="space-y-4 mb-16 reveal">
+            <div class="font-mono text-cyber-cyan text-sm tracking-widest uppercase flex items-center space-x-2">
+                <span class="w-8 h-[1px] bg-cyber-cyan"></span>
+                <span>04. Academic Background</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white font-mono">Education & Qualification</h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto glass-panel card-lift p-8 sm:p-10 rounded-2xl relative overflow-hidden reveal">
+            
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6 pb-6 border-b border-white/10 relative z-10">
+                <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-[0_0_15px_rgba(94,39,80,0.5)] group-hover:scale-105 transition-transform duration-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full">
+                        <rect width="200" height="200" fill="#5b2652"/>
+                        <path d="M 25 85 Q 60 50 95 70 T 175 65 Q 130 95 90 85 T 25 85 Z" fill="#ffffff"/>
+                        <path d="M 105 90 Q 140 90 170 115 Q 140 100 105 90 Z" fill="#ffffff"/>
+                        <text x="100" y="150" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="900" font-size="65" fill="#ffffff" text-anchor="middle">RGU</text>
+                        <text x="100" y="180" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="2">ABERDEEN</text>
+                    </svg>
+                </div>
+                <div class="text-center sm:text-left w-full">
+                    <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/30">Undergraduate</span>
+                    <h3 class="text-2xl font-bold text-white font-mono mt-3">Robert Gordon University</h3>
+                    <p class="text-cyber-cyan font-mono text-sm mt-2 leading-relaxed">
+                        Bachelor of Engineering (Honours) in Artificial Intelligence and Data Engineering
+                    </p>
+                </div>
+            </div>
+
+            <p class="relative z-10 text-slate-300 text-sm leading-relaxed mb-6">
+                Preparing to embark on a comprehensive curriculum focusing on advanced mathematics for machine learning, data structures, algorithm design, big data architectures, neural networks, and scalable database systems.
+            </p>
+
+            <div class="relative z-10 border-t border-white/10 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
+                <div class="flex items-center space-x-3 text-slate-300">
+                    <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
+                    <span>Machine Learning & Deep Learning</span>
+                </div>
+                <div class="flex items-center space-x-3 text-slate-300">
+                    <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
+                    <span>Distributed Data Processing</span>
+                </div>
+                <div class="flex items-center space-x-3 text-slate-300">
+                    <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
+                    <span>Software Engineering Principles</span>
+                </div>
+                <div class="flex items-center space-x-3 text-slate-300">
+                    <i class="fa-solid fa-hourglass-start text-cyber-cyan"></i>
+                    <span>Advanced Data Structures & Algorithms</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (z-10) -->
+    <section id="contact" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div class="space-y-4 mb-12 text-center reveal">
+            <div class="flex justify-center items-center space-x-2 font-mono text-cyber-cyan text-sm tracking-widest uppercase">
+                <span class="w-8 h-[1px] bg-cyber-cyan"></span>
+                <span>05. Transmission Channel</span>
+                <span class="w-8 h-[1px] bg-cyber-cyan"></span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white font-mono mt-4">Get in Touch</h2>
+            <p class="text-slate-400 max-w-lg mx-auto text-sm">Want to mentor me, collaborate on a beginner project, or just say hi? Reach out directly.</p>
+        </div>
+
+        <div class="glass-panel p-10 sm:p-14 rounded-2xl relative reveal delay-100 text-center">
+            <div class="relative z-10 space-y-6">
+                
+                <div class="pt-2">
+                    <h3 class="font-mono text-2xl font-bold text-white mb-3">Connect with me</h3>
+                    <p class="text-slate-400 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
+                        Skip the forms. The best way to reach me is via Instagram or Email. I'll get back to you as soon as possible.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 pt-4">
+                    <a href="https://www.instagram.com/mansab_amm/" target="_blank" rel="noopener noreferrer" class="magnetic inline-flex items-center justify-center space-x-3 px-8 py-5 rounded-xl font-mono font-bold text-sm sm:text-base bg-gradient-to-r from-cyber-purple to-pink-600 text-white hover:shadow-neon-purple transition-all transform hover:-translate-y-1 tracking-wider w-full sm:w-auto btn-click">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                        <span>mansab_amm</span>
+                    </a>
+
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mansabamm29@gmail.com" target="_blank" rel="noopener noreferrer" class="magnetic inline-flex items-center justify-center space-x-3 px-8 py-5 rounded-xl font-mono font-bold text-sm sm:text-base bg-gradient-to-r from-cyber-cyan to-blue-600 text-cyber-dark hover:shadow-neon-cyan transition-all transform hover:-translate-y-1 lowercase tracking-wider w-full sm:w-auto btn-click">
+                        <i class="fa-regular fa-envelope text-lg"></i>
+                        <span>mansabamm29@gmail.com</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (z-10) -->
+    <footer class="relative z-10 border-t border-white/5 py-12 px-4 sm:px-6 lg:px-8 text-center font-mono text-xs text-slate-400 space-y-4 mt-12">
+        <div class="flex items-center justify-center space-x-6 text-lg">
+            <a href="https://www.linkedin.com/in/mansab-mohammed-3688833b2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate-400 hover:text-cyber-cyan transition-all duration-300 hover:-translate-y-1">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/mansab_amm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-slate-400 hover:text-cyber-purple transition-all duration-300 hover:-translate-y-1">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-slate-400 hover:text-cyber-cyan transition-all duration-300 hover:-translate-y-1">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="text-slate-400 hover:text-cyber-cyan transition-all duration-300 hover:-translate-y-1">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+        </div>
+        <p>&copy; 2026 Mansab Mohammed | Aspiring AI & Data Engineering Student. All systems operational.</p>
+    </footer>
+
+    <!-- Scroll to Top Button (z-50) -->
+    <button id="scrollToTopBtn" aria-label="Scroll to top" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-cyber-cyan text-cyber-dark rounded-full flex items-center justify-center shadow-neon-cyan opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4 hover:bg-white hover:scale-110 btn-click">
+        <i class="fa-solid fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        // 1. High-performance particle stream
+        (function initOpticalFlowCanvas() {
+            const canvas = document.getElementById('optical-flow-canvas');
+            if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+
+            let width, height;
+            let scrollVelocity = 0;
+            let lastScrollY = window.scrollY;
+            
+            function resize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                canvas.style.width = width + 'px';
+                canvas.style.height = height + 'px';
+                ctx.scale(dpr, dpr);
+            }
+            resize();
+
+            const particleCount = Math.min(80, Math.floor(width / 25)); 
+            const particles = Array.from({ length: particleCount }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.6, 
+                vy: (Math.random() - 0.5) * 0.6 - 0.15,
+                radius: Math.random() * 2 + 1,   
+                hue: Math.random() > 0.35 ? '#00f0ff' : '#bd00ff'
+            }));
+
+            window.addEventListener('resize', resize, { passive: true });
+            window.addEventListener('scroll', () => {
+                const currentY = window.scrollY;
+                scrollVelocity = Math.max(-12, Math.min(12, (currentY - lastScrollY) * 0.12));
+                lastScrollY = currentY;
+            }, { passive: true });
+
+            const TWO_PI = Math.PI * 2;
+
+            function renderFrame() {
+                ctx.clearRect(0, 0, width, height);
+                scrollVelocity *= 0.92;
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy - scrollVelocity * 0.35;
+
+                    if (p.x < 0) p.x = width;
+                    else if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    else if (p.y > height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, TWO_PI);
+                    ctx.fillStyle = p.hue;
+                    ctx.shadowBlur = 15;       
+                    ctx.shadowColor = p.hue;   
+                    ctx.fill();
+                    ctx.shadowBlur = 0;        
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const distSq = dx * dx + dy * dy;
+
+                        if (distSq < 25000) { 
+                            const alpha = (1 - distSq / 25000) * 0.4; 
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(renderFrame);
+            }
+            requestAnimationFrame(renderFrame);
+        })();
+
+        // 2. Fluid Glass Light Reflection (Mouse Tracking)
+        document.querySelectorAll('.glass-panel').forEach(panel => {
+            panel.addEventListener('mousemove', (e) => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Update CSS variables for the radial gradient highlight
+                panel.style.setProperty('--mouse-x', `${x}px`);
+                panel.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // 3. Magnetic Buttons Effect
+        const magneticBtns = document.querySelectorAll('.magnetic');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0px, 0px)`;
+            });
+        });
+
+        // 4. Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // 5. Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 6. Typing Effect
+        const typedEl = document.getElementById('typed-text');
+        const words = [
+            'Machine Learning Basics.',
+            'Python Programming.',
+            'Data Structures.',
+            'How to build AI projects.'
+        ];
+
+        let w = 0, c = 0, deleting = false;
+        (function tick() {
+            const word = words[w];
+            typedEl.textContent = word.slice(0, c);
+            let delay = deleting ? 45 : 90;
+            if (!deleting && c === word.length) {
+                deleting = true; delay = 1800;
+            } else if (deleting && c === 0) {
+                deleting = false; w = (w + 1) % words.length; delay = 400;
+            } else {
+                c += deleting ? -1 : 1;
+            }
+            setTimeout(tick, delay);
+        })();
+
+        // 7. Scroll Spy & Reveal
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { rootMargin: '-35% 0px -55% 0px' });
+
+        sections.forEach(sec => navObserver.observe(sec));
+
+        // 8. Scroll to Top
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
         let isScrollingTick = false;
 
